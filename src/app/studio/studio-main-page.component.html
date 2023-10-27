@@ -1,0 +1,18 @@
+
+<div class="main-content">
+    <div class="blurred-background"></div>
+  <div class="studio-card" *ngFor="let studio of studios">
+    <h3>{{ studio.type }}</h3>
+    <p><strong>Location:</strong> {{ studio.location }}</p>
+    <p><strong>Owner:</strong> {{ studio.ownerUsername }}</p>
+  
+    <h4>Services:</h4>
+    <ul>
+      <li *ngFor="let service of studio.service">
+        <h5>{{ service.title }}</h5>
+        <p>{{ service.description }}</p>
+  
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<p>"Dodajemy studio"</p><div class="centered-container">
+    <mat-card>
+        <form [formGroup]="studioForm" (ngSubmit)="addStudio()" type="">
+            <p>
+                <mat-form-field appearance="outline">
+                    <mat-label>Typ zakładu</mat-label>
+                    <input autocomplete="off" formControlName="type" type="text" matInput placeholder="Typ">
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field appearance="outline">
+                    <mat-label>Lokalizacja</mat-label>
+                    <input autocomplete="off" formControlName="location" type="text" matInput placeholder="Lokalizacja">
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field appearance="outline">
+                    <mat-label>Właściciel</mat-label>
+                    <input autocomplete="off" formControlName="ownerUsername" type="text" matInput placeholder="Właściciel">
+                </mat-form-field>
+            </p>
+           
+            <button mat-raised-button color="primary">Dodaj biznes</button>
+        </form>
+    </mat-card>
+</div>
