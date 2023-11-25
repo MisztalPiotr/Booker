@@ -1,26 +1,85 @@
-<p>"Dodajemy studio"</p><div class="centered-container">
+<H2>Dodajemy studio</H2>
     <mat-card>
         <form [formGroup]="studioForm" (ngSubmit)="addStudio()" type="">
             <p>
                 <mat-form-field appearance="outline">
-                    <mat-label>Typ zakładu</mat-label>
-                    <input autocomplete="off" formControlName="type" type="text" matInput placeholder="Typ">
+                  <mat-label>Typ zakładu</mat-label>
+                  
+                  <mat-select formControlName="type">
+                    <mat-option *ngFor="let type of businessTypes" [value]="type">{{ type }}</mat-option>
+                  </mat-select>
                 </mat-form-field>
             </p>
+            
             <p>
                 <mat-form-field appearance="outline">
                     <mat-label>Lokalizacja</mat-label>
                     <input autocomplete="off" formControlName="location" type="text" matInput placeholder="Lokalizacja">
                 </mat-form-field>
             </p>
+
             <p>
                 <mat-form-field appearance="outline">
                     <mat-label>Właściciel</mat-label>
                     <input autocomplete="off" formControlName="ownerUsername" type="text" matInput placeholder="Właściciel">
                 </mat-form-field>
             </p>
-           
-            <button mat-raised-button color="primary">Dodaj biznes</button>
+
+            <!-- <p>
+                <mat-form-field appearance="outline">
+                    <mat-label>Zdjęcie</mat-label>
+                    <input autocomplete="off" formControlName="ownerUsername" type="file" matInput placeholder="Zdjęcie">
+                    <button type="button" >Upload Image</button>
+                </mat-form-field>
+            </p> -->
+            <!-- <form [formGroup]="imageForm">
+                <mat-form-field>
+                  <mat-label>Upload Image</mat-label>
+                  <input type="file" (change)="onFileChange($event)" formControlName="file">
+                </mat-form-field>
+                <button type="button" (click)="uploadImage()">Upload Image</button>
+              </form>
+            <p>Dodaj Usługi:</p> -->
+            
+            
+               
+              
+             <div class="studio-card" *ngFor="let service of newStudio.service">
+                 <mat-card>
+                     <h5>Nazwa usługi: {{ service.title }}</h5>
+                    <p>Opis usługi: {{ service.description }}</p>
+                    <button mat-raised-button color="warn" (click)="deleteService(service.title, service.description)">Usuń</button>
+             </mat-card>
+                 <br>
+             </div>
+              
+               
+                 
+            <mat-card>
+                <form [formGroup]="serviceForm" (ngSubmit)="addService()" type="">
+                    
+                    <p>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Tytuł</mat-label>
+                            <input autocomplete="off" formControlName="title" type="text" matInput placeholder="Tytuł">
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Opis</mat-label>
+                            <input autocomplete="off" formControlName="description" type="text" matInput placeholder="Opis">
+                        </mat-form-field>
+                    </p>
+                
+                    <button mat-raised-button color="primary">Dodaj usługę</button>
+        
+            </form>
+    
+        </mat-card>
+        <br>
+        <br>
+        <br>
+        <button mat-raised-button color="primary">Dodaj biznes</button>
         </form>
-    </mat-card>
-</div>
+        
+</mat-card>

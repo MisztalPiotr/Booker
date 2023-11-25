@@ -14,12 +14,13 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../app/environments/environment';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import {MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { NavbarComponent } from 'src/navbar/navbar.component';
 import { StudioNewComponent } from './studio/studio-new.component';
+
 
 @NgModule({
     declarations: [
@@ -38,11 +39,10 @@ import { StudioNewComponent } from './studio/studio-new.component';
         BrowserAnimationsModule,
 
         AngularFireModule.initializeApp(environment.firebaseConfig),  // imports firebase/app needed for everything
-
+        MatSelectModule,
         MatButtonModule,
         MatCardModule,
         MatInputModule,
-
         FormsModule,
         ReactiveFormsModule,
     ],

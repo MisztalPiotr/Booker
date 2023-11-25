@@ -5,7 +5,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
 <nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top">
-  <a class="navbar-brand" href="#" routerLink="/dashboard">Booker</a>
+  <a class="navbar-brand" [routerLink]="['/studio-main-page', 'all']">Booker</a>
   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb" aria-expanded="true">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -13,10 +13,10 @@
     <ul class="navbar-nav">
     
       <li class="nav-item">
-        <a class="nav-link" href="#" routerLink="/dashboard">Fryzjer</a>
+        <a class="nav-link" [routerLink]="['/studio-main-page', 'hairdresser']">Fryzjer</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link">Makijaż</a>
+        <a class="nav-link" [routerLink]="['/studio-main-page', 'makeup']">Makijaż</a>
       </li>
 
       <li *ngIf="(afAuth.user | async)" class="nav-item">

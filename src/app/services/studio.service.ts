@@ -18,11 +18,11 @@ export class StudioService {
         return this.db.list('studios').valueChanges() as Observable<Studio[]>;
       }
 
-      addStudio(user: Studio) {
+      addStudio(studio: Studio) {
         this.getNewId().then((newId) => {
-          this.db.list('studios').set(newId.toString(), user)
+          this.db.list('studios').set(newId.toString(), studio)
             .then(() => {
-              this.router.navigate(['/']);      
+              this.router.navigate(['/studio-main-page',studio.type]);      
             })
             .catch((error) => {
               console.error('Error adding user:', error);
