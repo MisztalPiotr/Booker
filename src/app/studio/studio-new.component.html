@@ -1,5 +1,8 @@
-<H2>Dodajemy studio</H2>
+
+<div class="main-content">
+<div class="blurred-background"></div>
     <mat-card>
+        <H2>Dodajemy studio</H2>
         <form [formGroup]="studioForm" (ngSubmit)="addStudio()" type="">
             <p>
                 <mat-form-field appearance="outline">
@@ -45,9 +48,9 @@
                
               
              <div class="studio-card" *ngFor="let service of newStudio.service">
-                 <mat-card>
-                     <h5>Nazwa usługi: {{ service.title }}</h5>
-                    <p>Opis usługi: {{ service.description }}</p>
+                 <mat-card class="services-card">
+                     <h5>{{ service.title }}</h5>
+                    <p>{{ service.description }}</p>
                     <button mat-raised-button color="warn" (click)="deleteService(service.title, service.description)">Usuń</button>
              </mat-card>
                  <br>
@@ -55,9 +58,9 @@
               
                
                  
-            <mat-card>
+            <mat-card class="services-card">
                 <form [formGroup]="serviceForm" (ngSubmit)="addService()" type="">
-                    
+                    <h2>Tworzenie usługi</h2>
                     <p>
                         <mat-form-field appearance="outline">
                             <mat-label>Tytuł</mat-label>
@@ -72,7 +75,6 @@
                     </p>
                 
                     <button mat-raised-button color="primary">Dodaj usługę</button>
-        
             </form>
     
         </mat-card>
