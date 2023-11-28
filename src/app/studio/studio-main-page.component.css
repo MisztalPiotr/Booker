@@ -8,20 +8,6 @@
     position: relative;
   }
  
-  
-  .background-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: url('/assets/images/hairdresser_background.jpg') center/cover fixed;
-    background-color: rgba(0, 0, 0, 0.5); /* Adjust the alpha value for transparency */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
   .blurred-background {
     position: fixed;
     top: 0;

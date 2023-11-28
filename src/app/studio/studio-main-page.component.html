@@ -1,12 +1,12 @@
 
 <div class="main-content">
-    <div class="blurred-background"></div>
+  <div class="blurred-background"></div>
   <div class="studio-card" *ngFor="let studio of presentedStudios">
-    <h3>{{ studio.type }}</h3>
-    <p><strong>Location:</strong> {{ studio.location }}</p>
-    <p><strong>Owner:</strong> {{ studio.ownerUsername }}</p>
+    <h3>{{ studio.studioName}}</h3>
+    <p><strong>Lokalizacja:</strong> {{ studio.location }}</p>
+    <p><strong>Właściciel:</strong> {{ studio.ownerUsername }}</p>
   
-    <h4>Services:</h4>
+    <h4>Usługi:</h4>
     <ul>
       <li *ngFor="let service of studio.service">
         <h5>{{ service.title }}</h5>

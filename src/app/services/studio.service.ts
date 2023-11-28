@@ -88,6 +88,7 @@ export class StudioService {
           
           // Sample Studio object
           const studio: Studio = {
+            studioName: 'name',
             type: 'Studio Type',
             location: 'Studio Location',
             ownerUsername: 'owner123',

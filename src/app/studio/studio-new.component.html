@@ -6,6 +6,13 @@
         <form [formGroup]="studioForm" (ngSubmit)="addStudio()" type="">
             <p>
                 <mat-form-field appearance="outline">
+                  <mat-label>Nazwa zakaładu</mat-label>
+                  <input autocomplete="off" formControlName="studioName" type="text" matInput placeholder="Nazwa zakładu">
+                </mat-form-field>
+            </p>
+
+            <p>
+                <mat-form-field appearance="outline">
                   <mat-label>Typ zakładu</mat-label>
                   
                   <mat-select formControlName="type">
@@ -45,7 +52,6 @@
             <p>Dodaj Usługi:</p> -->
             
             
-               
               
              <div class="studio-card" *ngFor="let service of newStudio.service">
                  <mat-card class="services-card">
@@ -57,7 +63,6 @@
              </div>
               
                
-                 
             <mat-card class="services-card">
                 <form [formGroup]="serviceForm" (ngSubmit)="addService()" type="">
                     <h2>Tworzenie usługi</h2>

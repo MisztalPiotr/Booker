@@ -16,6 +16,7 @@ export class StudioNewComponent implements OnInit {
     serviceForm: FormGroup;
     imageForm: FormGroup;
     newStudio: Studio = {
+        studioName: "",
         location:  "",
         type: "",
         ownerUsername: "",
@@ -25,6 +26,7 @@ export class StudioNewComponent implements OnInit {
 
     constructor(private studioService: StudioService, private router: Router){
         this.studioForm = new FormGroup({
+            'studioName': new FormControl('', Validators.required),
             'type': new FormControl('', Validators.required),
             'location': new FormControl('', Validators.required),
             'ownerUsername': new FormControl('', Validators.required)
@@ -49,6 +51,7 @@ export class StudioNewComponent implements OnInit {
         this.newStudio.location = this.studioForm.value.location,
         this.newStudio.type = this.studioForm.value.type,
         this.newStudio.ownerUsername =  this.studioForm.value.ownerUsername,
+        this.newStudio.studioName = this.studioForm.value.studioName,
         //console.log(this.newStudio)
         this.studioService.addStudio(this.newStudio);   
     }
