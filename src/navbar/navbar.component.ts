@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app'; // Import the 'firebase/app' module
 
 @Component({
     selector: 'navbar',
     templateUrl: './navbar.component.html',
-    styleUrls: ['./navbar.component.css']
+    styleUrls: ['./navbar.component.css'],
+    encapsulation: ViewEncapsulation.None
 })
 export class NavbarComponent implements OnInit {
 

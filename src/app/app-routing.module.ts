@@ -11,7 +11,7 @@ import { StudioMainPageComponent } from './studio/studio-main-page.component';
 import { StudioNewComponent } from './studio/studio-new.component';
 
 const routes: Routes = [
-    { path: '', redirectTo: 'studio-main-page', pathMatch: 'full' },
+    { path: '', redirectTo: 'studio-main-page/all', pathMatch: 'full' },
     { path: 'studio-main-page/:studioType', component: StudioMainPageComponent },
     { path: 'studio-new', component: StudioNewComponent, canActivate: [AuthGuard] },
     { path: 'home', component: HomeComponent },

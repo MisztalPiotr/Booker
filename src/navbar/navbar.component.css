@@ -1,0 +1,40 @@
+.custom-navbar.navbar {
+    background: transparent;
+  }
+  
+  .custom-navbar.navbar a {
+    color: white; /* Set your desired text color */
+  }
+
+  .custom-logo {
+    font-family: 'Your Custom Font', cursive; /* Use a custom font if desired */
+    font-size: 24px; /* Adjust the font size as needed */
+    font-weight: bold; /* Adjust the font weight as needed */
+    letter-spacing: 2px; /* Adjust the letter spacing as needed */
+    color: #ffffff; /* Set your desired text color */
+    text-decoration: none; /* Remove underline, if any */
+    background-color: #7a5207; /* Set your desired background color */
+    padding: 16px 16px; /* Adjust the padding as needed */
+    border-radius: 5px; /* Add border-radius for rounded corners if desired */
+  }
+  
+  /* Additional styles for hover or other states if needed */
+  .custom-logo:hover {
+    text-decoration: underline; /* Add underline on hover if desired */
+    color: #ffcc00; /* Change color on hover if desired */
+  }
+
+  .custom-link {
+    font-family: 'Your Custom Font', cursive; /* Use a custom font if desired */
+    font-size: 16px; /* Adjust the font size as needed */
+     /* Adjust the font weight as needed */
+    letter-spacing: 2px; /* Adjust the letter spacing as needed */
+    color: #ffffff; /* Set your desired text color */
+    text-decoration: none; /* Remove underline, if any */
+  }
+  
+  /* Additional styles for hover or other states if needed */
+  .custom-link:hover {
+    text-decoration: underline; /* Add underline on hover if desired */
+    color: #ffcc00; /* Change color on hover if desired */
+  }
