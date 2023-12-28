@@ -3,14 +3,21 @@
   <div class="blurred-background"></div>
   <div class="studio-card" *ngFor="let studio of presentedStudios">
     <h3>{{ studio.studioName}}</h3>
+    <div *ngIf="studio.imageUrl" class="upload-preview-container">
+      <img [src]="studio.imageUrl" alt="Uploaded Image">
+    </div>
     <p><strong>Lokalizacja:</strong> {{ studio.location }}</p>
     <p><strong>Właściciel:</strong> {{ studio.ownerUsername }}</p>
-  
+     
     <h4>Usługi:</h4>
     <ul>
       <li *ngFor="let service of studio.service">
+        <!-- <div *ngIf="service.imageUrl" class="upload-preview-container">
+          <img [src]="service.imageUrl" alt="Uploaded Image">
+        </div> -->
         <h5>{{ service.title }}</h5>
         <p>{{ service.description }}</p>
+        
   
       </li>
     </ul>

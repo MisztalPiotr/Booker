@@ -74,3 +74,9 @@
   .studio-card:hover {
     transform: scale(1.05); /* Adjust the scale factor as needed */
   }
+  img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }

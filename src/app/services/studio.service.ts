@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
 import { AngularFireDatabase } from '@angular/fire/database'; // Import AngularFireDatabase
-
+import { AngularFireStorage } from '@angular/fire/storage';
 import { Studio } from './model/studio.model';
 import { Reservation } from './model/reservation.model';
 import { Service } from './model/service.model';
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class StudioService {
-    constructor(private db: AngularFireDatabase, private router: Router) {}
+    constructor(private db: AngularFireDatabase, private router: Router, private storage: AngularFireStorage) {}
 
     getStudios(): Observable<Studio[]> { // Specify the return type as User[]
         return this.db.list('studios').valueChanges() as Observable<Studio[]>;
@@ -93,9 +93,33 @@ export class StudioService {
             location: 'Studio Location',
             ownerUsername: 'owner123',
             service: services,
+            imageUrl: "test",
           };
               
           // Add the test user using the service
           this.addStudio(studio);
      } 
+     
+     uploadFile(file: File): Promise<string> {
+      const path = `/uploads/${new Date().getTime()}_${file.name}`;
+      const storageRef = this.storage.ref(path);
+    
+      return storageRef.put(file).then(() => {
+        return storageRef.getDownloadURL().toPromise();
+      });
+    }
+
+    uploadServiceFile(file: File): Promise<string> {
+      const path = `/uploads/services/${new Date().getTime()}_${file.name}`;
+      const storageRef = this.storage.ref(path);
+    
+      return storageRef.put(file).then(() => {
+        return storageRef.getDownloadURL().toPromise();
+      });
+    }
+
+    saveImageUrlToDatabase(imageUrl: string) {
+      const data = { imageUrl: imageUrl };
+      console.log(data);
+    }
 }

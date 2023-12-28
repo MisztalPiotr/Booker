@@ -14,13 +14,22 @@ export class StudioNewComponent implements OnInit {
     
     studioForm: FormGroup;
     serviceForm: FormGroup;
+    imageUrl: string | null = null; 
+    imageServiceUrl : string | null = null; 
     imageForm: FormGroup;
+    imageServiceForm: FormGroup;
+    selectedFileName: string | null = null;
+    selectedServiceFileName: string | null = null;
+
+    selectedFile: File | undefined;  
+    selectedServiceFile: File | undefined;  
     newStudio: Studio = {
         studioName: "",
         location:  "",
         type: "",
         ownerUsername: "",
-        service:[]
+        service:[],
+        imageUrl:"",
       };
     businessTypes: string[] = ['makeup', 'hairdresser', 'all']; 
 
@@ -38,6 +47,9 @@ export class StudioNewComponent implements OnInit {
         });
         this.imageForm = new FormGroup({
             'file': new FormControl(['']),
+          });
+        this.imageServiceForm = new FormGroup({
+            'serviceFile': new FormControl(['']),
           });
        
     }
@@ -60,10 +72,13 @@ export class StudioNewComponent implements OnInit {
         const newService = {
             title: this.serviceForm.value.title,
             description: this.serviceForm.value.description,
+            imageUrl: this.imageServiceUrl,
             reservations: []
           };
         console.log(newService)
         this.newStudio.service.push(newService)
+        this.imageServiceUrl = null;
+        this.selectedServiceFileName = null;
     }
 
     deleteService(title: String, description: String){
@@ -72,7 +87,45 @@ export class StudioNewComponent implements OnInit {
     onFileChange(event: Event){
 
     }
-    uploadImage(){
-        
+    handleFileInput(event: any): void {
+        this.selectedFile = event.target.files[0] as File;
+        this.selectedFileName = this.selectedFile.name;
     }
+    
+    uploadImage(): void {
+        if (this.selectedFile) {
+          const reader = new FileReader();
+    
+          reader.onload = (e: any) => {
+            this.imageUrl = e.target.result;
+          };
+    
+          reader.readAsDataURL(this.selectedFile);
+           this.studioService.uploadFile(this.selectedFile).then((imageUrl) => {
+            this.newStudio.imageUrl = imageUrl;
+           });
+           
+        }
+      }
+
+      handleFileServiceInput(event: any): void {
+        this.selectedServiceFile = event.target.files[0] as File;
+        this.selectedServiceFileName = this.selectedServiceFile.name;
+    }
+
+      uploadServiceImage(): void {
+        if (this.selectedServiceFile) {
+          const reader = new FileReader();
+    
+          reader.onload = (e: any) => {
+            this.imageServiceUrl = e.target.result;
+          };
+    
+          reader.readAsDataURL(this.selectedServiceFile);
+           this.studioService.uploadServiceFile(this.selectedServiceFile).then((imageServiceUrl) => {
+            this.imageServiceUrl = imageServiceUrl;
+           });
+           
+        }
+      }
 }

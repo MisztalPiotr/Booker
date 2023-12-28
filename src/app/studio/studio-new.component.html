@@ -2,8 +2,22 @@
 <div class="main-content">
 <div class="blurred-background"></div>
     <mat-card>
-        <H2>Dodajemy studio</H2>
-        <form [formGroup]="studioForm" (ngSubmit)="addStudio()" type="">
+        <H2>Swórz swój biznes</H2>
+        
+        <form [formGroup]="studioForm" (ngSubmit)="addStudio()" >
+            <form [formGroup]="imageForm" (ngSubmit)="uploadImage()" class="upload-form">
+                <h2>Dodaj zdjęcie zakładu</h2>
+                <input type="file"  id="file" (change)="handleFileInput($event)" class="upload-input">
+                <label for="file" class="upload-label">
+                    <span *ngIf="!selectedFileName">Wybierz zdjęcie</span>
+                    <span *ngIf="selectedFileName">{{ selectedFileName }}</span>
+                  </label>
+                <button class="uploadImageButton" (click)="uploadImage()">Dodaj</button>
+                <div *ngIf="imageUrl" class="upload-preview-container">
+                  <img [src]="imageUrl" alt="Uploaded Image">
+                </div>
+            </form>
+
             <p>
                 <mat-form-field appearance="outline">
                   <mat-label>Nazwa zakaładu</mat-label>
@@ -34,27 +48,13 @@
                     <input autocomplete="off" formControlName="ownerUsername" type="text" matInput placeholder="Właściciel">
                 </mat-form-field>
             </p>
-
-            <!-- <p>
-                <mat-form-field appearance="outline">
-                    <mat-label>Zdjęcie</mat-label>
-                    <input autocomplete="off" formControlName="ownerUsername" type="file" matInput placeholder="Zdjęcie">
-                    <button type="button" >Upload Image</button>
-                </mat-form-field>
-            </p> -->
-            <!-- <form [formGroup]="imageForm">
-                <mat-form-field>
-                  <mat-label>Upload Image</mat-label>
-                  <input type="file" (change)="onFileChange($event)" formControlName="file">
-                </mat-form-field>
-                <button type="button" (click)="uploadImage()">Upload Image</button>
-              </form>
-            <p>Dodaj Usługi:</p> -->
-            
-            
+           
               
              <div class="studio-card" *ngFor="let service of newStudio.service">
                  <mat-card class="services-card">
+                    <div *ngIf="service.imageUrl" class="upload-preview-container">
+                        <img [src]="service.imageUrl" alt="Uploaded Image">
+                      </div>
                      <h5>{{ service.title }}</h5>
                     <p>{{ service.description }}</p>
                     <button mat-raised-button color="warn" (click)="deleteService(service.title, service.description)">Usuń</button>
@@ -66,6 +66,18 @@
             <mat-card class="services-card">
                 <form [formGroup]="serviceForm" (ngSubmit)="addService()" type="">
                     <h2>Tworzenie usługi</h2>
+                    <form [formGroup]="imageServiceForm" (ngSubmit)="uploadServiceImage()" class="upload-form">
+                        <h2>Dodaj zdjęcie usługi</h2>
+                        <input type="file"  id="serviceFile" (change)="handleFileServiceInput($event)" class="upload-input">
+                        <label for="serviceFile" class="upload-label">
+                            <span *ngIf="!selectedServiceFileName">Wybierz zdjęcie</span>
+                            <span *ngIf="selectedServiceFileName">{{ selectedServiceFileName }}</span>
+                          </label>
+                        <button class="uploadImageButton" (click)="uploadServiceImage()">Dodaj</button>
+                        <div *ngIf="imageServiceUrl" class="upload-preview-container">
+                          <img [src]="imageServiceUrl" alt="Uploaded Image">
+                        </div>
+                    </form>
                     <p>
                         <mat-form-field appearance="outline">
                             <mat-label>Tytuł</mat-label>
