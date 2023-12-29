@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-
+import { map } from 'rxjs/operators';
 import { AngularFireDatabase } from '@angular/fire/database'; // Import AngularFireDatabase
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Studio } from './model/studio.model';
@@ -32,11 +32,20 @@ export class StudioService {
 
 
     getStudios(): Observable<Studio[]> { // Specify the return type as User[]
-        return this.db.list('studios').valueChanges() as Observable<Studio[]>;
+      return this.db.list('studios').snapshotChanges().pipe(
+        map(changes => {
+          return changes.map(c => ({
+            id: c.payload.key, // Extract the key (ID) from the payload
+            ...c.payload.val() as Studio // Include the rest of the payload as the Studio data
+          }));
+        })
+      );
       }
 
       addStudio(studio: Studio) {
+        
         this.getNewId().then((newId) => {
+          studio.id = newId.toString();
           this.db.list('studios').set(newId.toString(), studio)
             .then(() => {
               this.router.navigate(['/studio-main-page',studio.type]);      
@@ -45,6 +54,17 @@ export class StudioService {
               console.error('Error adding user:', error);
             });
         });
+      }
+
+      editStudio(studioId: string, updatedStudio: Studio): Promise<void> {
+        return this.db.list('studios').update(studioId, updatedStudio)
+          .then(() => {
+            // Navigate to the studio main page or any other page as needed
+            this.router.navigate(['/studio-main-page', updatedStudio.type]);
+          })
+          .catch((error) => {
+            console.error('Error editing studio:', error);
+          });
       }
     
       getNewId(): Promise<number> {
@@ -105,6 +125,7 @@ export class StudioService {
           
           // Sample Studio object
           const studio: Studio = {
+            id: "1",
             studioName: 'name',
             type: 'Studio Type',
             location: 'Studio Location',

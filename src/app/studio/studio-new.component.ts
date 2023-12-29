@@ -24,6 +24,7 @@ export class StudioNewComponent implements OnInit {
     selectedFile: File | undefined;  
     selectedServiceFile: File | undefined;  
     newStudio: Studio = {
+        id: "1",
         studioName: "",
         location:  "",
         type: "",
