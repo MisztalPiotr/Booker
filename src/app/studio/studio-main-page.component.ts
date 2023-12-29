@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Studio } from '../services/model/studio.model';
 import { StudioService } from '../services/studio.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -18,7 +18,7 @@ export class StudioMainPageComponent implements OnInit {
     hairdresserStudios: Studio[] = [];
     makeupStudios: Studio[] = [];
     studioType: String;
-    constructor(private studioService: StudioService,private route: ActivatedRoute){
+    constructor(private studioService: StudioService,private route: ActivatedRoute, private router: Router){
         this.studioService.getStudios().subscribe((s) => {
             this.presentedStudios = s;
             this.allStudios = s;
@@ -66,6 +66,11 @@ export class StudioMainPageComponent implements OnInit {
     
     getStudios(){
 
+    }
+    showDetails(studio: Studio){
+        this.studioService.saveCurrentStudioToLocalStorage(studio);
+        
+        this.router.navigate(['/studio-details']); 
     }
 
 }

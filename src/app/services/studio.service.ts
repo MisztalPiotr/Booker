@@ -12,7 +12,24 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class StudioService {
-    constructor(private db: AngularFireDatabase, private router: Router, private storage: AngularFireStorage) {}
+
+    currentStudio: Studio;
+
+    constructor(private db: AngularFireDatabase, private router: Router, private storage: AngularFireStorage) {
+      this.initializeCurrentStudio();
+    }
+
+    initializeCurrentStudio() {
+      const storedObject = localStorage.getItem('studioObject');
+      this.currentStudio = storedObject ? JSON.parse(storedObject) : null;
+    }
+
+    saveCurrentStudioToLocalStorage(studio: Studio): void {
+      const studioString = JSON.stringify(studio);
+      localStorage.setItem('studioObject', studioString);
+      this.currentStudio = studio;
+    }
+
 
     getStudios(): Observable<Studio[]> { // Specify the return type as User[]
         return this.db.list('studios').valueChanges() as Observable<Studio[]>;

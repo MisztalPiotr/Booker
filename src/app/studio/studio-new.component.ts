@@ -31,7 +31,7 @@ export class StudioNewComponent implements OnInit {
         service:[],
         imageUrl:"",
       };
-    businessTypes: string[] = ['makeup', 'hairdresser', 'all']; 
+    businessTypes: string[] = ['makijaż', 'fryzjer', 'wszystko']; 
 
     constructor(private studioService: StudioService, private router: Router){
         this.studioForm = new FormGroup({
@@ -60,8 +60,13 @@ export class StudioNewComponent implements OnInit {
     addStudio(){
         console.log(this.studioForm);
         console.log(this.newStudio)
+        const typeMapping = {
+          'fryzjer': 'hairdresser',
+          'makijaż': 'makeup',
+          'wszystko' : 'all'
+        };
         this.newStudio.location = this.studioForm.value.location,
-        this.newStudio.type = this.studioForm.value.type,
+        this.newStudio.type = typeMapping[this.studioForm.value.type] || this.studioForm.value.type,
         this.newStudio.ownerUsername =  this.studioForm.value.ownerUsername,
         this.newStudio.studioName = this.studioForm.value.studioName,
         //console.log(this.newStudio)

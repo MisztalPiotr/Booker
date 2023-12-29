@@ -20,6 +20,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { NavbarComponent } from 'src/navbar/navbar.component';
 import { StudioNewComponent } from './studio/studio-new.component';
+import { StudioDetailsComponent } from './studio/studio-details.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { StudioNewComponent } from './studio/studio-new.component';
         DashboardComponent,
         NavbarComponent,
         StudioMainPageComponent,
-        StudioNewComponent
+        StudioNewComponent,
+        StudioDetailsComponent
     ],
     imports: [
         BrowserModule,

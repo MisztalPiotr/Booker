@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
             else if (result.isValid == false) {
                 console.log('login error', result);
                 this.firebaseErrorMessage = result.message;
-                this.router.navigate(['/studio-main-page','all']);   
+                   
             }
         });
     }

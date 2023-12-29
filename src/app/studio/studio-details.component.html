@@ -1,0 +1,57 @@
+<div class="main-content">
+    <div class="blurred-background"></div>
+    <div class="studio-card">
+      <h3>{{ studio.studioName}}</h3>
+      <p><strong>Lokalizacja:</strong> {{ studio.location }}</p>
+      <div *ngIf="studio.imageUrl" class="upload-preview-container">
+        <img [src]="studio.imageUrl" alt="Uploaded Image">
+      </div>
+     
+      <!-- <p><strong>Właściciel:</strong> {{ studio.ownerUsername }}</p> -->
+      <br>
+    </div> 
+      <!-- <h4>Usługi:</h4> -->
+      <ul class="service-ul">
+        <li *ngFor="let service of studio.service">
+          <mat-card class="service-card">
+            <div class="serviceImgContainerParent">
+              <div class="serviceImgContainer">
+                <div *ngIf="service.imageUrl" class="upload-preview-container">
+                  <img [src]="service.imageUrl" alt="Uploaded Image">
+                </div>
+              </div>
+            </div>
+            <h5>{{ service.title }}</h5>
+            <p>{{ service.description }}</p>
+           
+
+            <!-- <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Popup Title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <p>This is the content of your popup.</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+              Umów
+            </button> -->
+
+
+            <button type="button" class="btn btn-primary" (click)="openSweetAlert()">
+              Umów
+            </button>
+          </mat-card>
+        </li>
+      </ul>
+    
+  </div>
