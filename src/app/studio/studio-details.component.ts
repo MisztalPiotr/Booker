@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { Reservation } from '../services/model/reservation.model';
 import { Service } from '../services/model/service.model';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-studio-details-page',
@@ -36,8 +37,25 @@ export class StudioDetailsComponent implements OnInit {
     this.options = ['9:00', '10:00', '11:00', '12:00'];
   }
  
-  updateOptions(){
-    this.options = ['12:00', '24:00', '11:00', '12:00'];
+  updateOptions(currentService: Service): void {
+    console.log(this.selectedDate);
+    console.log(currentService);
+  
+    this.options = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00'];
+  
+    if (currentService.reservations && Array.isArray(currentService.reservations)) {
+      const reservations: Reservation[] = currentService.reservations.filter(reservation =>
+        reservation.startDate.includes(this.selectedDate)
+      );
+  
+      const hoursArray: string[] = reservations.map(reservation => {
+        const startTime: string[] = reservation.startDate.split(' ');
+        const time: string[] = startTime[1].split(':');
+        return `${time[0]}:${time[1]}`;
+      });
+  
+      this.options = this.options.filter(option => !hoursArray.includes(option));
+    }
   }
 
   openSweetAlert(currentService: Service): void {
@@ -60,7 +78,7 @@ export class StudioDetailsComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
        
-        this.updateOptions();
+        this.updateOptions(currentService);
         
         Swal.fire({
             title: '',
@@ -97,8 +115,9 @@ export class StudioDetailsComponent implements OnInit {
                     service.description === currentService.description
                   ));
                   
+                  console.log("last" + foundService.reservations)
                   if (foundService) {
-                    if (!foundService.reservations) {
+                    if (!foundService.reservations || !Array.isArray(foundService.reservations)) {
                         foundService.reservations = []; 
                       }
                     foundService.reservations.push(reservation);
