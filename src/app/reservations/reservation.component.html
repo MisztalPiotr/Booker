@@ -1,0 +1,23 @@
+<div class="main-content">
+    <div class="blurred-background"></div>
+    <div  *ngFor="let studio of studios" >
+      <div  *ngFor="let service of studio.service" >
+        <div *ngFor="let reservation of service.reservations" >
+        
+          <div  class="studio-card"  *ngIf="reservation.username === user.email">
+            <h1>{{studio.studioName}}</h1>
+            <h2>{{studio.location}}</h2>
+            <h2>Data: {{reservation.startDate}}</h2>
+            <h2>Potwierdzona: {{reservation.confirmed}}</h2>
+            <button mat-raised-button color="warn" (click)="deleteReservation(studio,service,reservation)">Usuń</button>
+          </div>
+         
+        </div>
+      </div>
+        
+         
+       
+      </div>
+
+    
+</div>

@@ -20,13 +20,13 @@ export class StudioService {
     }
 
     initializeCurrentStudio() {
-      const storedObject = localStorage.getItem('studioObject');
+      const storedObject = localStorage.getItem('studio');
       this.currentStudio = storedObject ? JSON.parse(storedObject) : null;
     }
 
     saveCurrentStudioToLocalStorage(studio: Studio): void {
       const studioString = JSON.stringify(studio);
-      localStorage.setItem('studioObject', studioString);
+      localStorage.setItem('studio', studioString);
       this.currentStudio = studio;
     }
 
@@ -40,6 +40,28 @@ export class StudioService {
           }));
         })
       );
+      }
+
+      getReservationsByUsername(username: string): Observable<Reservation[]> {
+        console.log(username)
+        return this.getStudios().pipe(
+          map(studios => {
+            let reservations: Reservation[] = [];
+            studios.forEach(studio => {
+              if(studio.service){
+                 studio.service.forEach(service => {
+                console.log(service);
+                if(service.reservations){
+                  reservations = reservations.concat(service.reservations.filter(reservation => reservation.username === username));
+                }
+                
+              });
+              }
+             
+            });
+            return reservations;
+          })
+        );
       }
 
       addStudio(studio: Studio) {
@@ -65,8 +87,19 @@ export class StudioService {
           .catch((error) => {
             console.error('Error editing studio:', error);
           });
+          
       }
-    
+
+      editStudioReservations(studioId: string, updatedStudio: Studio): Promise<void> {
+        return this.db.list('studios').update(studioId, updatedStudio)
+          .then(() => {
+            
+          })
+          .catch((error) => {
+            console.error('Error editing studio:', error);
+          });
+        }
+        
       getNewId(): Promise<number> {
         return new Promise((resolve, reject) => {
           this.db.list<number>('studios').query.once('value')

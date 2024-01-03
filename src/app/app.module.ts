@@ -21,6 +21,7 @@ import { MatInputModule } from '@angular/material/input';
 import { NavbarComponent } from 'src/navbar/navbar.component';
 import { StudioNewComponent } from './studio/studio-new.component';
 import { StudioDetailsComponent } from './studio/studio-details.component';
+import { ReservationComponent } from './reservations/reservation.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { StudioDetailsComponent } from './studio/studio-details.component';
         NavbarComponent,
         StudioMainPageComponent,
         StudioNewComponent,
-        StudioDetailsComponent
+        StudioDetailsComponent,
+        ReservationComponent
     ],
     imports: [
         BrowserModule,

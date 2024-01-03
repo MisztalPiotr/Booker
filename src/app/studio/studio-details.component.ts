@@ -18,6 +18,7 @@ export class StudioDetailsComponent implements OnInit {
   studio: Studio;
   selectedDate: string = new Date().toISOString().split('T')[0];
   options: string[] = [];
+  clientName: string;
   user: firebase.default.User | null;
 
   constructor(
@@ -62,6 +63,8 @@ export class StudioDetailsComponent implements OnInit {
     Swal.fire({
       title: '',
       html: `
+        <label for="name">Podaj Imię:</label>
+        <input type="text" id="name" class="form-control">
         <label for="datepicker">Wybierz datę:</label>
         <input type="date" id="datepicker" class="form-control">
       `,
@@ -70,6 +73,8 @@ export class StudioDetailsComponent implements OnInit {
       cancelButtonText: 'Cancel',
       preConfirm: async () => {
         const dateSelect = document.getElementById('datepicker') as HTMLInputElement;
+        const name = document.getElementById('name') as HTMLInputElement;
+        this.clientName = name.value;
         this.selectedDate = dateSelect.value;
         return {
           date: dateSelect.value,
@@ -102,9 +107,16 @@ export class StudioDetailsComponent implements OnInit {
             if (result.isConfirmed) {
               // Handle the selected date and option (result.value.date, result.value.option)
               Swal.fire('Twój termin to:', `${this.selectedDate}` + ' ' + `${result.value.option}`, 'success');
+
+              let tempName = "";
+              if(!this.user){
+                tempName = this.clientName;
+              }else{
+                tempName = this.user.email;
+              }
               const reservation: Reservation = 
                 {
-                  username: this.user.email,
+                  username: tempName,
                   confirmed: false,
                   startDate: this.selectedDate + " " + result.value.option,
                   endDate: this.selectedDate + " " + result.value.option

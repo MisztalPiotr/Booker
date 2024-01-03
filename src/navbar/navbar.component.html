@@ -26,7 +26,9 @@
 
     <ul class="nav navbar-nav ml-auto">
       
-      
+      <li *ngIf="(user)" class="nav-item">
+        <a class="nav-link custom-link" href="#" routerLink="/reservations"><span class="fas fa-user"></span> Rezerwacje</a>
+      </li>
       <li *ngIf="!(afAuth.user | async)" class="nav-item">
         <a class="nav-link custom-link" href="#" routerLink="/signup"><span class="fas fa-user"></span> Załóż konto</a>
       </li>
