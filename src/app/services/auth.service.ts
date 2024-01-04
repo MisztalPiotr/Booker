@@ -9,13 +9,14 @@ import { Router } from '@angular/router';
 export class AuthService {
 
     userLoggedIn: boolean;      // other components can check on this variable for the login status of the user
-
+    isAdmin: boolean;
     constructor(private router: Router, private afAuth: AngularFireAuth) {
         this.userLoggedIn = false;
-
+        this.isAdmin = false;
         this.afAuth.onAuthStateChanged((user) => {              // set up a subscription to always know the login status of the user
             if (user) {
                 this.userLoggedIn = true;
+                this.setAdminStateIfPermited(user);
             } else {
                 this.userLoggedIn = false;
             }
@@ -48,5 +49,14 @@ export class AuthService {
                 if (error.code)
                     return { isValid: false, message: error.message };
             });
+    }
+
+    setAdminStateIfPermited(user: any){
+        if(user.email === "bookeradmin@gmail.com"){
+            this.isAdmin = true;
+        }
+        else{
+            this.isAdmin = false;
+        }
     }
 }

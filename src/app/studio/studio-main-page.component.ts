@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Studio } from '../services/model/studio.model';
 import { StudioService } from '../services/studio.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
@@ -18,11 +19,10 @@ export class StudioMainPageComponent implements OnInit {
     hairdresserStudios: Studio[] = [];
     makeupStudios: Studio[] = [];
     studioType: String;
-    constructor(private studioService: StudioService,private route: ActivatedRoute, private router: Router){
+    constructor(private studioService: StudioService,private route: ActivatedRoute, private router: Router, private authService: AuthService){
         this.studioService.getStudios().subscribe((s) => {
             console.log(s);
             this.presentedStudios = s;
-            console.log(this.presentedStudios);
             this.allStudios = s;
             if(this.studioType === this.makeupType){
                 this.loadMakeupStudios();
@@ -72,6 +72,11 @@ export class StudioMainPageComponent implements OnInit {
     showDetails(studio: Studio){
         this.studioService.saveCurrentStudioToLocalStorage(studio);
         this.router.navigate(['/studio-details']); 
+    }
+
+    deleteStudio(event: Event,studio: Studio){
+        event.stopPropagation();
+       this.studioService.deleteStudio(studio.id);
     }
 
 }

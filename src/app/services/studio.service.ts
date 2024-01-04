@@ -193,4 +193,14 @@ export class StudioService {
       const data = { imageUrl: imageUrl };
       console.log(data);
     }
+
+    deleteStudio(studioId: string): Promise<void> {
+      return this.db.list('studios').remove(studioId)
+        .then(() => {
+          
+        })
+        .catch((error) => {
+          console.error('Error deleting studio:', error);
+        });
+    }
 }
