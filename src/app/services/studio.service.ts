@@ -163,6 +163,7 @@ export class StudioService {
             type: 'Studio Type',
             location: 'Studio Location',
             ownerUsername: 'owner123',
+            ownerEmail: 'test@email.com',
             service: services,
             imageUrl: "test",
           };

@@ -8,6 +8,7 @@ export interface Studio {
     type: string;
     location: string;
     ownerUsername: string;
+    ownerEmail: string;
     service: Service[];
     imageUrl: string;
   }

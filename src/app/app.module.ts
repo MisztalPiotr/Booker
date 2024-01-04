@@ -22,6 +22,7 @@ import { NavbarComponent } from 'src/navbar/navbar.component';
 import { StudioNewComponent } from './studio/studio-new.component';
 import { StudioDetailsComponent } from './studio/studio-details.component';
 import { ReservationComponent } from './reservations/reservation.component';
+import { StudioEditComponent } from './studio/studio-edit.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { ReservationComponent } from './reservations/reservation.component';
         StudioMainPageComponent,
         StudioNewComponent,
         StudioDetailsComponent,
-        ReservationComponent
+        ReservationComponent,
+        StudioEditComponent
     ],
     imports: [
         BrowserModule,

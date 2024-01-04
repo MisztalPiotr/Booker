@@ -10,15 +10,18 @@ export class AuthService {
 
     userLoggedIn: boolean;      // other components can check on this variable for the login status of the user
     isAdmin: boolean;
+    user: firebase.default.User | null;
     constructor(private router: Router, private afAuth: AngularFireAuth) {
         this.userLoggedIn = false;
         this.isAdmin = false;
-        this.afAuth.onAuthStateChanged((user) => {              // set up a subscription to always know the login status of the user
+        this.afAuth.onAuthStateChanged((user) => {     
+            this.user = user;         // set up a subscription to always know the login status of the user
             if (user) {
                 this.userLoggedIn = true;
                 this.setAdminStateIfPermited(user);
             } else {
                 this.userLoggedIn = false;
+                this.setAdminStateIfPermited(user);
             }
         });
     }
@@ -52,6 +55,12 @@ export class AuthService {
     }
 
     setAdminStateIfPermited(user: any){
+
+        if(!user){
+            this.isAdmin = false;
+            return;
+        }
+
         if(user.email === "bookeradmin@gmail.com"){
             this.isAdmin = true;
         }

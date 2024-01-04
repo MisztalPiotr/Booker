@@ -3,6 +3,7 @@ import { Studio } from '../services/model/studio.model';
 import { StudioService } from '../services/studio.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
@@ -29,12 +30,13 @@ export class StudioNewComponent implements OnInit {
         location:  "",
         type: "",
         ownerUsername: "",
+        ownerEmail: "",
         service:[],
         imageUrl:"",
       };
     businessTypes: string[] = ['makijaż', 'fryzjer', 'wszystko']; 
 
-    constructor(private studioService: StudioService, private router: Router){
+    constructor(private studioService: StudioService, private router: Router, private authService: AuthService){
         this.studioForm = new FormGroup({
             'studioName': new FormControl('', Validators.required),
             'type': new FormControl('', Validators.required),
@@ -70,6 +72,7 @@ export class StudioNewComponent implements OnInit {
         this.newStudio.type = typeMapping[this.studioForm.value.type] || this.studioForm.value.type,
         this.newStudio.ownerUsername =  this.studioForm.value.ownerUsername,
         this.newStudio.studioName = this.studioForm.value.studioName,
+        this.newStudio.ownerEmail = this.authService.user.email;
         //console.log(this.newStudio)
         this.studioService.addStudio(this.newStudio);   
     }

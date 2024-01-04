@@ -11,11 +11,13 @@ import { StudioMainPageComponent } from './studio/studio-main-page.component';
 import { StudioNewComponent } from './studio/studio-new.component';
 import { StudioDetailsComponent } from './studio/studio-details.component';
 import { ReservationComponent } from './reservations/reservation.component';
+import { StudioEditComponent } from './studio/studio-edit.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'studio-main-page/all', pathMatch: 'full' },
     { path: 'studio-details', component: StudioDetailsComponent },
     { path: 'reservations', component: ReservationComponent },
+    { path: 'studio-edit', component: StudioEditComponent },
     { path: 'studio-main-page/:studioType', component: StudioMainPageComponent },
     { path: 'studio-new', component: StudioNewComponent, canActivate: [AuthGuard] },
     { path: 'home', component: HomeComponent },
