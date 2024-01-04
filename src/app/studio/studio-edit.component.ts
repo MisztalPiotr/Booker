@@ -35,7 +35,7 @@ export class StudioEditComponent implements OnInit {
 
     showDetails(studio: Studio){
         this.studioService.saveCurrentStudioToLocalStorage(studio);
-        this.router.navigate(['/studio-details']); 
+        this.router.navigate(['/studio-edit-details']); 
     }
 
     deleteStudio(event: Event,studio: Studio){

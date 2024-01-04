@@ -71,9 +71,7 @@
     color: #777;
   }
 
-  .studio-card:hover {
-    transform: scale(1.05); /* Adjust the scale factor as needed */
-  }
+
   img {
     max-width: 100%;
     height: auto;
@@ -87,12 +85,21 @@
     width: 100%;
 }
 
-.delete-button-container {
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-}
+.button-container {
+    display: flex;
+    
+    width: 100%;
+  }
+  
+  .edit-button-container,
+  .delete-button-container {
+    margin-right: 10px; /* Dodaj margines między przyciskami, jeśli jest to konieczne */
+  }
 
 .delete-button-container button:hover {
   transform: scale(1.04);
 }
+
+.edit-button-container button:hover {
+    transform: scale(1.04);
+  }

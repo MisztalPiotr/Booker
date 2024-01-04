@@ -11,20 +11,36 @@ export class AuthService {
     userLoggedIn: boolean;      // other components can check on this variable for the login status of the user
     isAdmin: boolean;
     user: firebase.default.User | null;
+    email = '';
     constructor(private router: Router, private afAuth: AngularFireAuth) {
         this.userLoggedIn = false;
         this.isAdmin = false;
+        this.initializeCurrentUser();
         this.afAuth.onAuthStateChanged((user) => {     
             this.user = user;         // set up a subscription to always know the login status of the user
             if (user) {
+                this.saveCurrentUserToLocalStorage(user);
                 this.userLoggedIn = true;
+                this.email = user.email;
                 this.setAdminStateIfPermited(user);
             } else {
+                this.saveCurrentUserToLocalStorage(user);
                 this.userLoggedIn = false;
                 this.setAdminStateIfPermited(user);
             }
         });
     }
+
+    initializeCurrentUser() {
+        const storedObject = localStorage.getItem('user');
+        this.user = storedObject ? JSON.parse(storedObject) : null;
+      }
+  
+      saveCurrentUserToLocalStorage(user: firebase.default.User): void {
+        const userString = JSON.stringify(user);
+        localStorage.setItem('user', userString);
+        this.user = user;
+      }
 
     loginUser(email: string, password: string): Promise<any> {
         return this.afAuth.signInWithEmailAndPassword(email, password)

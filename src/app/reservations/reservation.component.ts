@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Reservation } from '../services/model/reservation.model';
 import { Service } from '../services/model/service.model';
 import { Studio } from '../services/model/studio.model';
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
@@ -18,21 +19,18 @@ export class ReservationComponent implements OnInit {
     studios;
     constructor(
         private studioService: StudioService,
+        private authService: AuthService,
         public afAuth: AngularFireAuth
       ) {
-        afAuth.authState.subscribe(user => {
-            this.user = user;
-            this.studioService.getReservationsByUsername(this.user.email).subscribe((r) =>{
-               console.log(r);
-               this.reservations = r;
+        
+          this.user = authService.user;
+          this.studioService.getReservationsByUsername(this.user.email).subscribe((r) =>{
+            console.log(r);
+            this.reservations = r;
+            this.studioService.getStudios().subscribe((s) =>{
+              this.studios = s;
+            });
           });
-
-          this.studioService.getStudios().subscribe((s) =>{
-            
-            this.studios = s;
-            
-       });
-        });
       }
 
     ngOnInit(): void {
