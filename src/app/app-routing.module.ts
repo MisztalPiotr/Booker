@@ -13,11 +13,13 @@ import { StudioDetailsComponent } from './studio/studio-details.component';
 import { ReservationComponent } from './reservations/reservation.component';
 import { StudioEditComponent } from './studio/studio-edit.component';
 import { StudioEditDetailsComponent } from './studio/studio-edit-details.component';
+import { ReservationConfirmComponent } from './reservations/reservation-confirm.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'studio-main-page/all', pathMatch: 'full' },
     { path: 'studio-details', component: StudioDetailsComponent },
     { path: 'reservations', component: ReservationComponent },
+    { path: 'reservations-confirm', component: ReservationConfirmComponent },
     { path: 'studio-edit', component: StudioEditComponent },
     { path: 'studio-edit-details', component: StudioEditDetailsComponent },
     { path: 'studio-main-page/:studioType', component: StudioMainPageComponent },

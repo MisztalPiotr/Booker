@@ -24,6 +24,7 @@ import { StudioDetailsComponent } from './studio/studio-details.component';
 import { ReservationComponent } from './reservations/reservation.component';
 import { StudioEditComponent } from './studio/studio-edit.component';
 import { StudioEditDetailsComponent } from './studio/studio-edit-details.component';
+import { ReservationConfirmComponent } from './reservations/reservation-confirm.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { StudioEditDetailsComponent } from './studio/studio-edit-details.compone
         StudioDetailsComponent,
         ReservationComponent,
         StudioEditComponent,
-        StudioEditDetailsComponent
+        StudioEditDetailsComponent,
+        ReservationConfirmComponent
     ],
     imports: [
         BrowserModule,

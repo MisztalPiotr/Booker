@@ -3,11 +3,12 @@
     <div  *ngFor="let studio of studios" >
       <div  *ngFor="let service of studio.service" >
         <div *ngFor="let reservation of service.reservations" >
-          <div  class="studio-card"  *ngIf="reservation.username === user.email"  [ngStyle]="{'background-color': reservation.confirmed ? 'green' : 'rgba(200, 77, 77, 0.9)'}">
+          <div  class="studio-card"  *ngIf="reservation && reservation.username === user.email"  [ngStyle]="{'background-color': reservation.confirmed === 'false' ? '#FF6F61' : (reservation.confirmed === 'true' ? '#88B04B' : '#EFC050')}">
+            
             <h1>{{studio.studioName}}</h1>
             <h2>{{studio.location}}</h2>
             <h2>Data: {{reservation.startDate}}</h2>
-            <h2>Potwierdzona: {{reservation.confirmed}}</h2>
+            <h2>Status: {{mapConfirmationStatus(reservation.confirmed)}}</h2>
             <button mat-raised-button color="warn" (click)="deleteReservation(studio,service,reservation)">Usuń</button>
           </div>
         </div>

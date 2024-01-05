@@ -43,4 +43,9 @@ export class StudioEditComponent implements OnInit {
        this.studioService.deleteStudio(studio.id);
     }
 
+    showReservations(studio: Studio){
+        this.studioService.saveCurrentStudioToLocalStorage(studio);
+        this.router.navigate(['/reservations-confirm']); 
+    }
+
 }

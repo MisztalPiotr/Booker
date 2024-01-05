@@ -47,7 +47,7 @@ export class ReservationComponent implements OnInit {
         const foundService = studio.service[serviceIndex];
     
         // Find the index of the reservation within the service based on the username
-        const reservationIndex = foundService.reservations.findIndex(r => r.username === reservation.username &&
+        const reservationIndex = foundService.reservations.findIndex(r => 
            r.startDate === r.startDate && reservation.endDate === reservation.endDate && r.confirmed === reservation.confirmed);
     
         // If the reservation with the matching username is found
@@ -57,6 +57,19 @@ export class ReservationComponent implements OnInit {
           studio.service[serviceIndex].reservations = foundService.reservations;
           this.studioService.editStudioReservations(studio.id, studio);
         }
+      }
+    }
+
+    mapConfirmationStatus(status: string): string {
+      switch (status) {
+        case 'true':
+          return 'Potwierdzone';
+        case 'false':
+          return 'Odrzucone';
+        case 'waiting':
+          return 'Oczekiwanie na akceptacje';
+        default:
+          return 'Unknown';
       }
     }
 

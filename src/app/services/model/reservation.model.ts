@@ -1,6 +1,6 @@
 export interface Reservation {
     username: string;
-    confirmed: boolean;
+    confirmed: string;
     startDate: string;
     endDate: string;
   }

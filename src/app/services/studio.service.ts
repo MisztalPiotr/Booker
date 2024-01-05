@@ -128,13 +128,13 @@ export class StudioService {
         const reservations: Reservation[] = [
             {
               username: 'user1',
-              confirmed: true,
+              confirmed: 'true',
               startDate: '2023-10-01 08:30',
               endDate: '2023-10-01 09:00'
             },
             {
               username: 'user2',
-              confirmed: false,
+              confirmed: 'false',
               startDate: '2023-10-01 09:30',
               endDate: '2023-10-01 10:00'
             },

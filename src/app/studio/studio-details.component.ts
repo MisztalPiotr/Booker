@@ -117,7 +117,7 @@ export class StudioDetailsComponent implements OnInit {
               const reservation: Reservation = 
                 {
                   username: tempName,
-                  confirmed: false,
+                  confirmed: 'waiting',
                   startDate: this.selectedDate + " " + result.value.option,
                   endDate: this.selectedDate + " " + result.value.option
                 }

@@ -27,5 +27,7 @@ export class NavbarComponent implements OnInit {
         this.afAuth.signOut();
     }
 
+    
+
   
 }
